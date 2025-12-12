@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Example: Purple Lantern (Indigo Tribe) -->
+  <!-- This file demonstrates how a user can create a new Lantern Corps without C# code. -->
+
+  <ThingDef ParentName="ApparelNoQualityBase">
+    <defName>PL_Ring</defName>
+    <label>Purple Lantern Ring</label>
+    <description>A power ring fueled by compassion.</description>
+    <graphicData>
+      <texPath>LanternsLight/Items/GL_Ring</texPath> <!-- Reusing GL texture for example -->
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(0.5, 0, 0.5, 1)</color> <!-- Apply purple tint -->
+    </graphicData>
+    <thingCategories>
+      <li>ApparelUtility</li>
+    </thingCategories>
+    <statBases>
+      <MarketValue>5000</MarketValue>
+      <Mass>0.1</Mass>
+      <EquipDelay>0.1</EquipDelay>
+    </statBases>
+    <tickerType>Normal</tickerType>
+    <apparel>
+      <careIfWornByCorpse>false</careIfWornByCorpse>
+      <bodyPartGroups><li>Waist</li></bodyPartGroups>
+      <layers><li>Belt</li></layers>
+      <tags><li>PurpleLanternRing</li></tags>
+    </apparel>
+    
+    <comps>
+       <li Class="DrAke.LanternsFramework.CompProperties_LanternRing" />
+    </comps>
+    
+    <modExtensions>
+       <li Class="DrAke.LanternsFramework.LanternDefExtension">
+          <ringColor>(0.5, 0, 0.5, 1)</ringColor>
+          <resourceLabel>Compassion</resourceLabel>
+          
+          <!-- Combat Properties -->
+          <blastDamage>15</blastDamage>
+          <blastDamageType>Burn</blastDamageType>
+          
+          <!-- Abilities Granted Automatically -->
+          <abilities>
+              <li>PL_Ability_Blast</li>
+          </abilities>
+       </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- Example Ability Definition -->
+  <AbilityDef>
+    <defName>PL_Ability_Blast</defName>
+    <label>indigo blast</label>
+    <description>Fire a blast of indigo energy.</description>
+    <jobDef>CastJump</jobDef> <!-- Using generic cast job -->
+    <iconPath>LanternsLight/UI/Ability_Blast</iconPath>
+    <verbProperties>
+      <verbClass>DrAke.LanternsFramework.Abilities.Verb_LanternBlast</verbClass>
+      <range>25</range>
+      <warmupTime>1.0</warmupTime>
+      <soundCast>Shot_ChargeRifle</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternCost">
+        <cost>0.05</cost>
+      </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>

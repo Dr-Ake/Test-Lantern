@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Green Lantern Ring (Test Version) -->
+  <!-- Fully defined via XML using the Lantern Core Framework -->
+
+  <ThingDef ParentName="ApparelNoQualityBase">
+    <defName>Test_GL_Ring</defName>
+    <label>Test Green Lantern Ring</label>
+    <description>A generic test ring implementing the Green Lantern functionality via Framework.</description>
+    <graphicData>
+      <texPath>LanternsLight/Items/GL_Ring</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <thingCategories>
+      <li>ApparelUtility</li>
+    </thingCategories>
+    <statBases>
+      <MarketValue>1000</MarketValue>
+      <Mass>0.1</Mass>
+      <EquipDelay>0.1</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <ToxicEnvironmentResistance>1.0</ToxicEnvironmentResistance>
+      <ComfyTemperatureMin>-200</ComfyTemperatureMin>
+      <ComfyTemperatureMax>200</ComfyTemperatureMax>
+    </equippedStatOffsets>
+    <tickerType>Normal</tickerType>
+    <apparel>
+      <careIfWornByCorpse>false</careIfWornByCorpse>
+      <bodyPartGroups><li>Waist</li></bodyPartGroups>
+      <layers><li>Belt</li></layers>
+      <tags><li>TestGreenLanternRing</li></tags>
+    </apparel>
+    
+    <!-- Core Comp -->
+    <comps>
+       <li Class="DrAke.LanternsFramework.CompProperties_LanternRing" />
+    </comps>
+    
+    <!-- Framework Config -->
+    <modExtensions>
+       <li Class="DrAke.LanternsFramework.LanternDefExtension">
+          <ringColor>(0, 1, 0, 1)</ringColor>
+          <resourceLabel>Willpower</resourceLabel>
+          
+          <blastDamage>12</blastDamage>
+          <blastDamageType>Burn</blastDamageType>
+          
+          <abilities>
+              <li>Test_GL_Blast</li>
+          </abilities>
+       </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- Ability: Basic Blast -->
+  <AbilityDef>
+    <defName>Test_GL_Blast</defName>
+    <label>willpower blast</label>
+    <description>Fire a blast of green energy.</description>
+    <jobDef>CastJump</jobDef>
+    <iconPath>LanternsLight/UI/Ability_Blast</iconPath>
+    <verbProperties>
+      <verbClass>DrAke.LanternsFramework.Abilities.Verb_LanternBlast</verbClass>
+      <range>24</range>
+      <warmupTime>0.5</warmupTime>
+      <soundCast>Shot_ChargeRifle</soundCast>
+    </verbProperties>
+    <comps>
+      <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternCost">
+        <cost>0.05</cost> <!-- 5% charge -->
+      </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>

@@ -28,6 +28,7 @@
         <blastDamageType>Burn</blastDamageType>
         <abilities>
           <li>Test_Ability_Blast</li>
+          <li>Test_Ability_BlastProjectile</li>
           <li>Test_Ability_Heal</li>
           <li>Test_Ability_StunBind</li>
           <li>Test_Ability_Barrier</li>
@@ -77,6 +78,64 @@
     <label>test blast</label>
     <description>Fire a basic spectrum blast.</description>
     <iconPath>LanternsLight/UI/Ability_Blast</iconPath>
+    <verbProperties Class="DrAke.LanternsFramework.Abilities.VerbProperties_LanternBlast">
+      <verbClass>DrAke.LanternsFramework.Abilities.Verb_LanternBlast</verbClass>
+      <range>25</range>
+      <warmupTime>0.4</warmupTime>
+      <soundCast>Shot_ChargeRifle</soundCast>
+      <targetParams>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetBuildings>true</canTargetBuildings>
+        <canTargetMechs>true</canTargetMechs>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetLocations>false</canTargetLocations>
+      </targetParams>
+      <!-- Placeholder beam fleck; tinted to ring color. -->
+      <beamFleckDef>LightningGlow</beamFleckDef>
+      <beamFleckScale>0.6</beamFleckScale>
+      <beamFleckCount>6</beamFleckCount>
+      <tintBeamToRingColor>true</tintBeamToRingColor>
+    </verbProperties>
+  </AbilityDef>
+
+  <!-- Projectile blast with a beam that stretches as it flies -->
+  <ThingDef ParentName="Lantern_Projectile_BlastBase">
+    <defName>Test_LanternBlastProjectile</defName>
+    <label>test blast projectile</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Small</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>0.6</drawSize>
+    </graphicData>
+    <projectile>
+      <speed>65</speed>
+    </projectile>
+  </ThingDef>
+
+  <AbilityDef ParentName="Lantern_Ability_BlastBase">
+    <defName>Test_Ability_BlastProjectile</defName>
+    <label>test projectile blast</label>
+    <description>Launch a traveling blast with a stretching beam.</description>
+    <iconPath>LanternsLight/UI/Ability_Blast</iconPath>
+    <verbProperties Class="DrAke.LanternsFramework.Abilities.VerbProperties_LanternBlast">
+      <verbClass>DrAke.LanternsFramework.Abilities.Verb_LanternBlast</verbClass>
+      <range>25</range>
+      <warmupTime>0.6</warmupTime>
+      <targetParams>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetBuildings>true</canTargetBuildings>
+        <canTargetMechs>true</canTargetMechs>
+        <canTargetSelf>false</canTargetSelf>
+        <canTargetLocations>false</canTargetLocations>
+      </targetParams>
+      <projectileDef>Test_LanternBlastProjectile</projectileDef>
+      <!-- vanilla dual-attached beam placeholder; tinted to ring -->
+      <projectileBeamMoteDef>Mote_IncineratorBurst</projectileBeamMoteDef>
+      <projectileBeamScale>0.5</projectileBeamScale>
+      <projectileBeamTintToRingColor>true</projectileBeamTintToRingColor>
+    </verbProperties>
   </AbilityDef>
 
   <!-- Heal construct (AOE) -->

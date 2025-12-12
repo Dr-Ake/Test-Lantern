@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ====================================================== -->
+  <!-- Test Lantern Ring that grants every generic core ability -->
+  <!-- ====================================================== -->
+
+  <ThingDef ParentName="Lantern_RingBase">
+    <defName>Test_AllAbilities_Ring</defName>
+    <label>Test Spectrum Ring</label>
+    <description>A framework test ring that grants every generic Lantern ability.</description>
+    <graphicData>
+      <texPath>LanternsLight/Items/GL_Ring</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <color>(1, 1, 1, 1)</color>
+    </graphicData>
+    <statBases>
+      <MarketValue>2000</MarketValue>
+      <Mass>0.1</Mass>
+      <EquipDelay>0.1</EquipDelay>
+    </statBases>
+
+    <modExtensions>
+      <li Class="DrAke.LanternsFramework.LanternDefExtension">
+        <ringColor>(0.2, 0.9, 1, 1)</ringColor>
+        <resourceLabel>Test Energy</resourceLabel>
+        <blastDamage>14</blastDamage>
+        <blastDamageType>Burn</blastDamageType>
+        <abilities>
+          <li>Test_Ability_Blast</li>
+          <li>Test_Ability_Heal</li>
+          <li>Test_Ability_StunBind</li>
+          <li>Test_Ability_Barrier</li>
+          <li>Test_Ability_Construct</li>
+          <li>Test_Ability_Summon</li>
+          <li>Test_Ability_Aura</li>
+        </abilities>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- ================== REQUIRED TEST HEDIFFS ================== -->
+
+  <HediffDef>
+    <defName>Test_LanternShield</defName>
+    <label>test lantern barrier</label>
+    <description>A temporary hard-light barrier for testing.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="DrAke.LanternsFramework.Abilities.HediffCompProperties_LanternShield">
+        <defaultMaxHp>120</defaultMaxHp>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Test_LanternAuraBuff</defName>
+    <label>test lantern aura</label>
+    <description>A mild test aura buff.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <stages>
+      <li>
+        <statOffsets>
+          <MoveSpeed>0.30</MoveSpeed>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ================== TEST ABILITIES ================== -->
+
+  <!-- Basic blast (uses ring's blastDamage unless overridden) -->
+  <AbilityDef ParentName="Lantern_Ability_BlastBase">
+    <defName>Test_Ability_Blast</defName>
+    <label>test blast</label>
+    <description>Fire a basic spectrum blast.</description>
+    <iconPath>LanternsLight/UI/Ability_Blast</iconPath>
+  </AbilityDef>
+
+  <!-- Heal construct (AOE) -->
+  <AbilityDef ParentName="Lantern_Ability_HealBase">
+    <defName>Test_Ability_Heal</defName>
+    <label>test heal field</label>
+    <description>Project a healing construct field.</description>
+    <iconPath>LanternsLight/UI/Ability_Battery</iconPath>
+    <comps Inherit="False">
+      <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternHeal">
+        <healAmount>20</healAmount>
+        <radius>4</radius>
+        <affectAlliesOnly>false</affectAlliesOnly>
+        <affectSelf>true</affectSelf>
+      </li>
+      <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternCost">
+        <cost>0.06</cost>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <!-- Stun/bind construct (AOE) -->
+  <AbilityDef ParentName="Lantern_Ability_StunBase">
+    <defName>Test_Ability_StunBind</defName>
+    <label>test bind</label>
+    <description>Bind hostiles with hard-light constructs.</description>
+    <iconPath>LanternsLight/UI/Ability_Glove</iconPath>
+    <comps Inherit="False">
+      <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternStun">
+        <stunTicks>240</stunTicks>
+        <radius>3</radius>
+        <affectHostilesOnly>false</affectHostilesOnly>
+      </li>
+      <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternCost">
+        <cost>0.06</cost>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <!-- Barrier bubble (AOE) -->
+  <AbilityDef ParentName="Lantern_Ability_BarrierBase">
+    <defName>Test_Ability_Barrier</defName>
+    <label>test barrier</label>
+    <description>Project a protective barrier bubble.</description>
+    <iconPath>LanternsLight/UI/Ability_Bubble</iconPath>
+    <comps Inherit="False">
+      <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternShieldAbility">
+        <shieldHediffDef>Test_LanternShield</shieldHediffDef>
+        <radius>5</radius>
+        <affectAlliesOnly>true</affectAlliesOnly>
+        <affectSelf>true</affectSelf>
+      </li>
+      <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternCost">
+        <cost>0.05</cost>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <!-- Temporary construct spawn -->
+  <AbilityDef ParentName="Lantern_Ability_ConstructBase">
+    <defName>Test_Ability_Construct</defName>
+    <label>test construct</label>
+    <description>Spawn temporary constructs at the target.</description>
+    <iconPath>LanternsLight/UI/Ability_Turret</iconPath>
+    <comps Inherit="False">
+      <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternConstructSpawn">
+        <thingDef>Sandbags</thingDef>
+        <spawnCount>4</spawnCount>
+        <spreadRadius>2</spreadRadius>
+        <durationTicks>2000</durationTicks>
+        <replaceExisting>true</replaceExisting>
+      </li>
+      <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternCost">
+        <cost>0.05</cost>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <!-- Projection/minion summon -->
+  <AbilityDef ParentName="Lantern_Ability_SummonBase">
+    <defName>Test_Ability_Summon</defName>
+    <label>test projection</label>
+    <description>Summon temporary spectrum projections.</description>
+    <iconPath>LanternsLight/UI/Ability_Shuttle</iconPath>
+    <comps Inherit="False">
+      <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternSummon">
+        <pawnKind>Muffalo</pawnKind>
+        <count>1</count>
+        <spawnRadius>2</spawnRadius>
+        <durationTicks>4000</durationTicks>
+        <setFactionToCaster>true</setFactionToCaster>
+      </li>
+      <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternCost">
+        <cost>0.10</cost>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <!-- Emotional aura buff -->
+  <AbilityDef ParentName="Lantern_Ability_AuraBase">
+    <defName>Test_Ability_Aura</defName>
+    <label>test aura</label>
+    <description>Emit a short-lived emotional aura.</description>
+    <iconPath>LanternsLight/UI/Flight</iconPath>
+    <!-- Inherit verbProperties/targeting from base -->
+    <comps Inherit="False">
+      <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternBuffAura">
+        <hediffDef>Test_LanternAuraBuff</hediffDef>
+        <severity>0.10</severity>
+        <radius>6</radius>
+        <durationTicks>3000</durationTicks>
+        <affectAlliesOnly>true</affectAlliesOnly>
+        <affectSelf>true</affectSelf>
+      </li>
+      <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternCost">
+        <cost>0.05</cost>
+      </li>
+    </comps>
+  </AbilityDef>
+
+</Defs>

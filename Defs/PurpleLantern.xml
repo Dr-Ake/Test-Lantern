@@ -20,6 +20,7 @@
       <Mass>0.1</Mass>
       <EquipDelay>0.1</EquipDelay>
     </statBases>
+    <smeltable>false</smeltable>
     <tickerType>Normal</tickerType>
     <apparel>
       <careIfWornByCorpse>false</careIfWornByCorpse>

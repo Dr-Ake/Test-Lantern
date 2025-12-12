@@ -19,6 +19,7 @@
       <Mass>0.1</Mass>
       <EquipDelay>0.1</EquipDelay>
     </statBases>
+    <smeltable>false</smeltable>
     <equippedStatOffsets>
       <ToxicEnvironmentResistance>1.0</ToxicEnvironmentResistance>
       <ComfyTemperatureMin>-200</ComfyTemperatureMin>

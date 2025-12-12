@@ -150,6 +150,9 @@
         <radius>4</radius>
         <affectAlliesOnly>false</affectAlliesOnly>
         <affectSelf>true</affectSelf>
+        <affectAnimals>true</affectAnimals>
+        <healPermanentInjuries>true</healPermanentInjuries>
+        <healNonNaturalInjuries>true</healNonNaturalInjuries>
       </li>
       <li Class="DrAke.LanternsFramework.Abilities.CompProperties_LanternCost">
         <cost>0.06</cost>
